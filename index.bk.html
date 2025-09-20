@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   个人项目介绍
+  </title>
+  <style>
+   :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 2;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            /* padding-bottom: 0.5rem; */
+            margin-top: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 0.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-top: 0.5rem;
+        }
+
+        h5 {
+            font-size: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        p {
+            margin-bottom: 0.5rem;
+        }
+        
+        ul {
+            margin-bottom: 0.5rem;
+            padding-left: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .results {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .result-card.widescreen {
+            grid-column: span 2;
+        }
+        
+        .result-card.portrait {
+            grid-column: span 1;
+        }
+        
+        .result-card {
+            background: var(--light-color);
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .result-card video {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            .results {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            padding-top: 60px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.9); 
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            width: auto;
+        }
+
+        .modal-content {  
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)} 
+            to {transform:scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+  </style>
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <h1>
+     个人项目介绍
+    </h1>
+   </div>
+  </header>
+  <div class="container">
+   <section id="face-swap">
+    <div class="project-card">
+     <h2>
+      视频换脸
+     </h2>
+     <h3>
+      方案与业务介绍
+     </h3>
+     <p>
+      自监督GAN + pix2pix蒸馏
+     </p>
+     <p>
+      业务：2022央视视频换脸项目，单额20w
+     </p>
+     <h3>
+      效果展示
+     </h3>
+     <div class="results">
+      <div class="result-card widescreen">
+       <video controls="" src="videos2/chinese_news_woman_guodegang.jpg.mp4">
+       </video>
+      </div>
+      <div class="result-card widescreen">
+       <video controls="" src="videos2/chinese_news_woman_0017.jpg.mp4">
+       </video>
+      </div>
+      <div class="result-card widescreen">
+       <video controls="" src="videos2/interview_hejiong_0006_LiXian.jpg.mp4">
+       </video>
+      </div>
+      <div class="result-card widescreen">
+       <video controls="" src="videos2/interview_hejiong_0017.jpg.mp4">
+       </video>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="lip-sync">
+    <div class="project-card">
+     <h2>
+      口型翻译V1：端到端GAN模型
+     </h2>
+     <h3>
+      技术方案
+     </h3>
+     <ul>
+      <li>
+       改进声音特征提取方式，wav2vec+梅尔谱特征，口型同步性更好
+      </li>
+      <li>
+       改进crop方式，容易收敛
+      </li>
+      <li>
+       “数字分身”：支持微调，微调后具有本人说话特征，纹理相似度好
+      </li>
+     </ul>
+     <h3>
+      业务落地
+     </h3>
+     <p>
+      落地到动车帝讲车数字人、toB三生智能，以及支持2024年冬季火山引擎force大会同声传译、即时零售销售实验、低成本电商数字人。其中懂车帝数字人月计收5w，toB共计收60w。
+     </p>
+     <h3>
+      效果展示
+     </h3>
+     <h4>
+      懂车帝讲车
+     </h4>
+     <p>
+      这个项目比较早，上线后模特素材只有一个，后期由于对方业务部门调整，工作重心转移到3D看车，模特素材没有更新需求
+     </p>
+     <div class="results">
+      <div class="result-card portrait">
+       <p>
+        完整效果
+       </p>
+       <video controls="" src="videos2/xxx-林小雅.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        素材效果
+       </p>
+       <video controls="" src="videos2/女生1-素材4_20s.mp4">
+       </video>
+      </div>
+     </div>
+     <h4>
+      三生智能（收入60万）
+     </h4>
+     <p>
+      客户同时测试我们的方案和硅基智能的方案，我们效果击败竞品成功签单。
+     </p>
+     <div class="results">
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/71_1739870449(原视频).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/1_25fps_1.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/70_1739870422(原视频).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/2_25fps_2 (1).mp4">
+       </video>
+      </div>
+     </div>
+     <h4>
+      Force大会-同声传译 、老板数字分身
+     </h4>
+     <p>
+      详情见bytetech：
+      <a href="https://bytetech.info/articles/7460796588098355238">
+       https://bytetech.info/articles/7460796588098355238
+      </a>
+     </p>
+     <p>
+      直播翻译：与直播团队联合开发，音频翻译部分采用豆包大模型能力，面容部分采用我们的口型翻译能力
+     </p>
+     <div class="results">
+      <div class="result-card widescreen">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/谭待素材1_25fps_input (1).mp4">
+       </video>
+      </div>
+      <div class="result-card widescreen">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/谭待素材1_25fps_谭待素材1音频_1_inp.mp4">
+       </video>
+      </div>
+     </div>
+     <p>
+      数字分身: 这里没有拿到成片，用绿幕素材简单展示，成片再经过人像分割+背景替换
+     </p>
+     <div class="results">
+      <div class="result-card portrait">
+       <video controls="" src="videos2/xxxx (4).mp4">
+       </video>
+      </div>
+     </div>
+     <h4>
+      即时零售
+     </h4>
+     <p>
+      无需任何拍摄，利用商家已上传的图片和视频，自动生成商品讲解文案并剪辑为图文视频，配合已有数字人形象进行讲解，通过高颜值数字人可吸引消费者点击了解商品，拉近与消费者的距离，提高购买转化率。
+     </p>
+     <div class="results">
+      <div class="result-card portrait">
+       <img src="images/即时零售1.png" style="width: 100%;">
+      </div>
+      <div class="result-card portrait">
+       <img src="images/即时零售2.png" style="width: 100%;">
+      </div>
+     </div>
+     <p>
+      投放视频展示
+     </p>
+     <div class="results">
+      <div class="result-card portrait">
+       <video controls="" src="videos2/3689775428840587270.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <video controls="" src="videos2/3721880365170819357.mp4">
+       </video>
+      </div>
+      <!-- <div class="result-card portrait">
+       <video controls="" src="videos2/3721864241913922476.mp4">
+       </video>
+      </div> -->
+      <div class="result-card portrait">
+       <video controls="" src="videos2/3731519425074036868.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <video controls="" src="videos2/3733553568855228615.mp4">
+       </video>
+      </div>
+     </div>
+     <p>
+      “1234567”简易带货新形式
+     </p>
+     <div class="results">
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/yaoyao_元气森林素材.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/yaoyao_元气森林素材_yaoyao_clone_audio元气森林.mp4">
+       </video>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="short-drama">
+    <div class="project-card">
+     <h2>
+      口型翻译V2：两阶段GAN模型
+     </h2>
+     <h3>
+      技术方案
+     </h3>
+     <ul>
+      <li>
+       整体框架audio2motion + motion2video 两阶段的生成方式
+      </li>
+      <li>
+       方案优势
+       <ul>
+        <li>
+         参考帧机制，模型能更好的恢复本人纹理
+        </li>
+        <li>
+         两阶段生成，motion表达+视频生成解耦
+        </li>
+       </ul>
+      </li>
+     </ul>
+    
+     <h4>
+      短剧口型翻译难点
+     </h4>
+     <ul>
+      <li>
+       画面中可能有多个人，如何实现音频和画面中人物的匹配
+      </li>
+      <li>
+       频繁的场景切换
+      </li>
+      <li>
+       频繁的遮挡与侧脸
+      </li>
+      <li>
+       短剧对画面生成质量要求较高
+      </li>
+      <li>
+       处理实效
+      </li>
+     </ul>
+     <h4>
+      针对这些难点，我们的改进
+     </h4>
+     <ul>
+      <li>
+       多ASD模型结合口部点位实现鲁棒的说话人检测
+      </li>
+      <li>
+       两阶段方案实现高质量口型翻译
+       <ul>
+        <li>
+         开源数据、youtube、b站数据，经质量过滤约400h clip
+        </li>
+        <li>
+         使用3d作为中间表示，从几何统特征参考学习说话风格
+        </li>
+        <li>
+         提取3d采用模型预测 + 后fitting的方式，几何参数更鲁棒、时序更稳定
+        </li>
+        <li>
+         分割模块优化遮挡问题
+        </li>
+        <li>
+         点位融合策略优化侧脸问题
+        </li>
+       </ul>
+      </li>
+      <li>
+       多线程与异步措施优化耗时，整体工程耗时比1:5
+      </li>
+     </ul>
+     <h4>
+      说话者检测流程
+     </h4>
+     <div class="results">
+        <div class="result-card widescreen">
+            <img src="images/说话者检测流程.png" style="width: 100%;">
+        </div>
+     </div>
+     <div class="results">
+        <div class="result-card widescreen">
+            <img src="images/lipsync流程.png" style="width: 100%;">
+        </div>
+     </div>
+
+     <h3>
+      业务介绍
+     </h3>
+     <p>
+      视频云上“声影智译”能力，已有多个客户接入
+     </p>
+     
+     <h3>
+      效果展示
+     </h3>
+     <h4>
+      短视频&amp; 电商场景
+     </h4>
+     <p>
+      --注重口型能力
+     </p>
+     <div class="results">
+      <div class="result-card widescreen">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/圈友会_遮挡20s_25fps (1).mp4">
+       </video>
+      </div>
+      <div class="result-card widescreen">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/output (20) (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/烧水壶_遮挡16s_25fps (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/output (21) (2).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/v15044gf0000d1a39efog65g3giiv3v0_30s (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/v15044gf0000d1a39efog65g3giiv3v0_30s_output (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/v15044gf0000d15i7jvog65tf54eqkeg (1).MP4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/v15044gf0000d15i7jvog65tf54eqkeg_output (1) (1).mp4">
+       </video>
+      </div>
+     </div>
+     <h4>
+      短剧场景
+     </h4>
+     <div class="results">
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/百那瑞1 (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/百那瑞1_result (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/哥斯拉原片 (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/哥斯拉原片_result (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        原视频
+       </p>
+       <video controls="" src="videos2/诱她入骨06_遮挡2s_25fps (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        翻译后
+       </p>
+       <video controls="" src="videos2/output (45) (1).mp4">
+       </video>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="product-video">
+    <div class="project-card">
+     <h2>
+      人物商品互动视频生成
+     </h2>
+     <p>
+      大模型背景下，基于大模型的文生图、文生视频、图生视频都比较成熟，各个数字人团队也在研发音频模态输入的视频生成，目前看，带商品的数字人讲解视频生还没有很成熟。我们于2025年Q2开始带商品的数字人视频生成研发
+     </p>
+     <h3>
+      总体流程
+     </h3>
+     <div class="results">
+        <div class="result-card widescreen">
+            <img src="images/人物商品视频生成总流程.png" style="width: 100%;">
+        </div>
+     </div>
+     <h3>
+      图片生成
+     </h3>
+     <p>
+      方式：收集模特数据，caption，训练模特Flux模型
+     </p>
+     <h3>
+      商品图替换
+     </h3>
+     <p>
+      流程：模版检索 + 图片编辑
+     </p>
+     <h4>
+      模版检索
+     </h4>
+     <p>
+      检索流程：
+     </p>
+     <div class="results">
+        <div class="result-card widescreen">
+            <img src="images/模版检索.png" style="width: 100%;">
+        </div>
+     </div>
+     <h5>
+      效果展示：
+     </h5>
+     <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果1.jpg" style="width: 100%;"></div>
+     </div>
+     <!-- <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果2.jpg" style="width: 100%;"></div>
+     </div> -->
+     <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果3.jpg" style="width: 100%;"></div>
+     </div>
+     <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果4.jpg" style="width: 100%;"></div>
+     </div>
+    
+     
+     <h5>
+      商品替换
+     </h5>
+     <p>
+      效果展示
+     </p>
+     <!-- <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果1.jpg" style="width: 100%;"></div>
+     </div> -->
+     <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果2.jpg" style="width: 100%;"></div>
+     </div>
+     <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果4.jpg" style="width: 100%;"></div>
+     </div>
+     <div class="results">
+        <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果5.jpg" style="width: 100%;"></div>
+     </div>
+     
+     
+     <h3>
+      视频生成
+     </h3>
+     <p>
+      i2v模型和流式推理实现30s视频生成
+     </p>
+     <h4>
+      开源i2v效果
+     </h4>
+     <div class="results">
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/2025-07-29_00001-audio (2).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/3598451651842863713_29_video.mp4_00001-audio.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/3598941254542603259_18_video.mp4_00001-audio.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/2025-07-08_00001-audio (2) (1).mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/3608880530654929351_11_video.mp4_00001-audio.mp4">
+       </video>
+      </div>
+      <!-- <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/3612032072195162748_06_video.mp4_00001-audio.mp4">
+       </video>
+      </div> -->
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/3598422637333886929_18_video.mp4_00001-audio.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/3585640580442644862_02_video.mp4_00001-audio.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/3585667374587762036_05_video.mp4_00001-audio.mp4">
+       </video>
+      </div>
+     </div>
+     <h4>
+      自研i2v效果
+     </h4>
+     <div class="results">
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/v11_1.mp4">
+       </video>
+      </div>
+      <div class="result-card portrait">
+       <p>
+        生成视频
+       </p>
+       <video controls="" src="videos2/v11_2.mp4">
+       </video>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="subtitle-removal">
+    <div class="project-card">
+     <h2>
+      视频字幕擦除
+     </h2>
+     <p>
+      方案：基于DiT的视频inpainting方案，方案介绍见 ByteTech：
+      <a href="https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe">
+       https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe
+      </a>
+     </p>
+     <h4>
+      效果展示
+     </h4>
+     <div class="results">
+        <div class="result-card widescreen">
+          <video controls src="videos2/字幕擦除demo.mp4"></video>
+        </div>
+        <div class="result-card widescreen">
+          <video controls src="videos2/字幕擦除_友商对比.mp4"></video>
+        </div>
+      </div>
+     <p>
+      落地情况：上线视频云，已经接入多个客户，月收入规模10w
+     </p>
+     
+     <p>
+      视频点播-精细化字幕擦除V4.0产品OnePage
+     </p>
+    </div>
+   </section>
+  </div>
+  <footer>
+   <div class="container">
+    <p>
+     © 2025 个人项目介绍
+    </p>
+   </div>
+  </footer>
+
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+  </div>
+
+  <script>
+    var modal = document.getElementById('myModal');
+    var modalImg = document.getElementById("img01");
+    var images = document.querySelectorAll('.result-card img');
+    images.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+    });
+
+    var span = document.getElementsByClassName("close")[0];
+
+    span.onclick = function() { 
+        modal.style.display = "none";
+    }
+    
+    modal.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+  </script>
+ </body>
+</html>
