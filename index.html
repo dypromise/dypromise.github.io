@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人项目介绍</title>
+    <title>AIGC项目展示</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="container">
-            <h1>项目效果展示</h1>
+            <h1>效果展示</h1>
             <p class="subtitle">探索AIGC在内容创作领域的无限可能</p>
         </div>
     </header>
@@ -19,8 +19,8 @@
         <div class="container">
             <a href="#product-video" class="active">Human Avatar 视频生成</a>
             <a href="#subtitle-removal">视频字幕擦除</a>
-            <a href="#lip-sync-v2">口型翻译V2</a>
-            <a href="#lip-sync-v1">口型翻译V1</a>
+            <a href="#lip-sync-v2">视频改口型V2</a>
+            <a href="#lip-sync-v1">视频改口型V1</a>
             <a href="#face-swap">视频换脸</a>
         </div>
     </nav>
@@ -67,7 +67,7 @@
     <div class="container">
         <section id="product-video" class="project-card">
             <h2>Human Avatar 视频生成</h2>
-            <p>AIGC正在重塑我们的内容创作方式。human avatar视频生成技术将逼真的虚拟形象与自然流畅的语音结合，让商品介绍不再局限于真人拍摄，实现全天候、多场景、低成本的自动化内容生产。无论是电商直播、短视频带货，还是品牌宣传，AIGC 数字人都能以生动、专业的形象，将产品亮点全方位呈现给观众，让每一次讲解都精准、高效、富有吸引力。</p>
+            <p>开源audio human avatar工作（如multitalk、omniavatar、hunyuan-avatar等），由于其通用属性，在口播场景下手势同步方面表现欠佳，尤其在说话时人物手势难以跟随语气、音调产生相应的节奏变化。我们方案在“音频-手势同步性”这一关键维度上，相较于Multitalk、FantasyTalking及HunyuanAvatar等主流开源方案，均展现出明显可感知的优势，生成的手势与语音内容在节奏和语义上具有更高的契合度。</p>
             <h3 id="product-video-tech">技术方案</h3>
             <div class="results">
                 <div class="result-card widescreen"><img src="images/人物商品视频生成总流程.png"></div>
@@ -138,7 +138,12 @@
         <section id="subtitle-removal" class="project-card">
             <h2>视频字幕擦除</h2>
             <h3 id="subtitle-removal-tech">技术方案</h3>
-            <p>方案：基于DiT的视频inpainting方案，方案介绍见 ByteTech：<a href="https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe">https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe</a></p>
+            <p>基于wan2.1的视频字幕擦除方案，介绍见ByteTech：<a href="https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe">https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe</a></p>
+             <ul>
+                <li>视频ocr模块</li>
+                <li>字幕mask模块</li>
+                <li>视频inpainting模块</li>
+             </ul>
             <h3 id="subtitle-removal-results">效果展示</h3>
             <div class="results">
                 <div class="result-card widescreen"><video controls src="videos2/字幕擦除demo.mp4"></video></div>
@@ -148,29 +153,124 @@
 
         <section id="lip-sync-v2" class="project-card">
             <h2>视频改口型V2：两阶段方案，支持多人场景</h2>
-            <h3 id="lip-sync-v2-challenges">短剧翻译难点</h3>
+            <h3 id="lip-sync-v2-challenges">视频改口型难点</h3>
             <ul>
-                <li>画面中可能有多个人，如何处理音频和画面中人物的匹配</li>
-                <li>频繁的场景切换，对高动态场景有较高要求</li>
-                <li>多样的遮挡、侧脸情景，使口型翻译难度增大</li>
-                <li>短剧对生成质量要求较高，低清模型不再满足要求</li>
-                <li>对处理实效有较高要求</li>
+                <li>画面中可能有多人，如何实现精准的音频与人脸配对</li>
+                <li>生成质量要求高</li>
+                <li>时序稳定性要求高</li>
+                <li>频繁遮挡与侧脸</li>
+                <li>整体流程复杂，耗时高</li>
             </ul>
             <h3 id="lip-sync-v2-tech">技术方案</h3>
+            <h4>模型设计</h4>
             <ul>
-                <li>多人匹配问题：设计多ASD模型+口部点位实现鲁棒的说话人检测，对比单ASD，识别准确率由61%提升至77%</li>
-                <li>构建 Audio2Motion + Motion2Video 两阶段生成算法，分别负责口型动作生成与视频纹理生成(GAN)</li>
-                <li>3D 空间点作为中间表示，采用 deep3D 模型预测 + landmark-fitting 方式，参数更鲁棒时序更稳定，显著提升模型 结果时序稳定性。</li>
-                <li>audio2motion模型:基于class-free-guidance的训练使口型风格在泛化与本人之间可调</li>
-                <li>motion2video模型:多参考帧、精心设计面部遮罩与融合策略、提升至512分辨率等优化生成质量，重建测试中SSIM 由 0.75 提升至 0.81，纹理保持主观评测中对 v1 有明显优势。</li>
-                <li>针对遮挡问题，设计sapiens人体点引导sam2分割，获取非遮挡区域mask，显著优化“面部浮出”的融合问题。</li>
-                <li>针对侧脸不稳定问题，设计mediapipe人脸点位和3D点位线性融合策略，在大角度侧脸、戴眼镜、出镜头等情况成 功率由低于 4 成提升至 7 成。</li>
-                <li>多线程与异步措施优化系统耗时，整体短剧类RTF由1:8降低至1:5</li>
+                <li>算法框架：两阶段的改口型框架，Audio2Motion + Motion2Video ，分别负责 口型动作生成 与 视频纹理生成 (GAN)</li>
+                <li>audio2motion模型:
+                    <ul>
+                        <li>模型结构：audio encoder + motion encoder + deep cnn decoder，cross attention融合音频特征和参考motion特征，输入deep cnn预测最终motion；</li>
+                        <li>3D点作为motion表示： 采用 deep3D 模型预测 + landmark-fitting 的方式，motion表示更精准；</li>
+                        <li>更多的motion点： 使用下半脸240个3D点，支持更灵活的面部运动；</li>
+                        <li>带参考motion的模型设计： 参考motion潜空间特征的均值方差作为参考运动风格输入motion decoder</li>
+                        <li>类classifier-free guidance的训练 ：增加可学习的embedding作为general motion特征，与参考motion特征在训练时随机作为motion特征，推理时则使用参数插值两者， 实现口型风格在泛化与本人之间可调；</li>
+                    </ul>
+                </li>
+                <li>motion2video模型: 基于多参考帧的GAN
+                    <ul>
+                        <li>模型结构：align module + translation module</li>
+                        <li>align module：根据target motion与source motion对多参考帧进行warp</li>
+                        <li>translation module：接收target motion与warpped特征，生成全脸图</li>
+                        <li>新颖的面部遮罩 ：包含鬓角，有效减轻yaw大角度时轮廓融合问题</li>
+                        <li>动态参考帧选择策略 ：
+                            <ul>
+                                <li>根据pose相似度选择 5帧动态参考帧</li>
+                                <li>根据张嘴大小 + 牙齿质量排序选择 20帧静态参考帧</li>
+                            </ul>
+                        </li>
+                        <li>512分辨率训练推理 ：提升面部清晰度</li>
+                        <li>生成质量评估：重建测试中SSIM 由 0.75 提升至 0.81，纹理保持主观评测中对 v1 有明显优势</li>
+                    </ul>
+                </li>
             </ul>
-            <p>说话者检测</p>
-            <div class="results">
-                <div class="result-card widescreen"><img src="images/说话者检测流程.png"></div>
-            </div>
+            <h4>音频多人匹配</h4>
+            <ul>
+                <li>Active Speaker Detection 模块输入‘人脸区域视频’与‘音频’，输出此人脸说话的置信度。一个简单的方案是所有人脸track与对应音频逐一进行ASD模型判断， 根据阈值或最高置信度决定是否在说话 。 这样做存在两个问题：
+                    <ul>
+                        <li>阈值不好设置 ，阈值设高了拒绝样本太多，召回率低，准确率高（漏判）；阈值低了召回高，准确低（误判）</li>
+                        <li>长视频无法结合声纹信息与人脸id信息 ，导致前后speaker_id不一致</li>
+                    </ul>
+                </li>
+                <li>我们设计的逻辑：
+                    <ul>
+                        <li>提升ASD模块精度： “多ASD模型 + 口部点位运动统计量”实现更高准确度的ASD模块</li>
+                        <li>逻辑优化：保证准确的情况下提升召回 。步骤：
+                            <ul>
+                                <li>ASD基础模块 高阈值保证配对成功语句的强置信</li>
+                                <li>整个视频时间跨度下 人脸ID特征聚类 ，形成人脸ID库</li>
+                                <li>整个视频时间跨度下 声纹特征聚类 ，形成声音ID库</li>
+                                <li>使用 基于传播（propagate）的图算法提升召回率</li>
+                            </ul>
+                        </li>
+                        <li>效果：此策略使准确率高达95%同时召回由30%提升到了65%</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>数据收集</h4>
+            <ul>
+                <li>构建数据处理pipline
+                    <ul>
+                        <li>视频基础过滤，码率、分辨率、音频存在性</li>
+                        <li>画质iqa过滤</li>
+                        <li>同步性过滤：人脸检测 -> 人脸追踪 -> 口型同步分数过滤 -> 抠出人头区域</li>
+                    </ul>
+                </li>
+                <li>b站10k长视频处理后得到约400h clip数据</li>
+                <li>Avspeech、TalkingHead-1kh中部分视频，筛选处理后约200h clip数据</li>
+            </ul>
+            <h4>遮挡优化</h4>
+            <ul>
+                <li>短剧、电商场景经常会出现遮挡，我们利用sam2的分割能力设计出一套分割流程，可以鲁棒地分割出非遮挡区域。 具体步骤：
+                    <ul>
+                        <li>使用face-parsing分割出脖子区域，找到 脖子中心点位</li>
+                        <li>使用sapiens预测 人手点位</li>
+                        <li>使用florece预测 商品框</li>
+                        <li>多维度打分排序策略 ：不合常识的商品框过滤、脖子框存在性检查、人手遮挡程度，商品框遮挡程度等规则，最终根据得分对帧排序</li>
+                        <li>引导点 + 引导框提升sam2鲁棒性 ：得分最优的5帧作为sam2引导帧，正引导点为鼻子点、下巴点、脖子点，负引导点为手部点，引导框为人脸-脖子框</li>
+                        <li>分段sam2推理 ：为保证长视频分割的连续性、降低显存使用，我们用分段推理，每段复用引导帧</li>
+                    </ul>
+                </li>
+                <li>这样得到了较高鲁棒性的人皮肤非遮挡区域，帮助motion2video的输出并回帖。</li>
+            </ul>
+            <h4>时序优化</h4>
+            <ul>
+                <li>通过优化算法流程中 各个环节的人脸点位、3D参数 提升时序稳定性</li>
+                <li>多尺度点位 ：
+                    <ul>
+                        <li>coarse点：人脸检测框外扩x倍最大外接框mediapipe人脸点位，image mode</li>
+                        <li>fine点：coarse点的外接框外扩x倍medipipe人脸点位，image + video mode</li>
+                        <li>deep3d点：deep3d net预测投影得到2d点</li>
+                        <li>fit点：fine和deep3d插值后的点 3dmm fitting后的shape投影得到2d点</li>
+                    </ul>
+                </li>
+                <li>点位回滚：观察到精细点位虽然准，但会漏检，因此当精细点位漏检时使用粗点位代替</li>
+                <li>点位补全：对于满足条件的“空洞”帧，使用前后帧插值补全</li>
+                <li>多粒度连续性分段 ：按框、粗点位、细点位等规则按连续性划分视频帧split ，目的是使split段内点位是连续的，方便后续平滑处理</li>
+                <li>点位平滑：split内做卡尔曼滤波</li>
+                <li>3dmm fitting加入 时序平滑约束 ，使fitting出的参数时序更平滑</li>
+                <li>deep3d投影点与mediapipe点插值优：化大角度时点位稳定性</li>
+            </ul>
+            <h4>侧脸优化</h4>
+            <ul>
+                <li>mediapipe的点位与deep3dface的投影点位做线性插值</li>
+                <li>公式：alpha * mediapipe + (1 - alpha) * deep3d</li>
+                <li>30度以内 alpha = 1，30-45度线性减少到0，大于45度alpha=0。</li>
+            </ul>
+            <h4>耗时优化</h4>
+            <ul>
+                <li>多措施优化耗时，最终整体短剧类RTF由1:10降低至1:5</li>
+                <li>模型torch compile编译</li>
+                <li>遮挡模块由于大模型较多，我们用一个 单独进程异步处理segmap</li>
+                <li>实现多线程基类 （基于生产者消费者），支持同步、异步处理mediapipe点位、写视频、face_detect等操作</li>
+            </ul>
             <p>lipsync算法</p>
             <div class="results">
                 <div class="result-card widescreen"><img src="images/lipsync流程.png"></div>
