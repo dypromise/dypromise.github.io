@@ -18,6 +18,7 @@
     <nav>
         <div class="container">
             <a href="#product-video" class="active">Human Avatar 视频生成</a>
+            <a href="#product-background-video">商品背景微动视频生成</a>
             <a href="#subtitle-removal">视频字幕擦除</a>
             <a href="#lip-sync-v2">视频改口型V2</a>
             <a href="#lip-sync-v1">视频改口型V1</a>
@@ -31,21 +32,22 @@
             <ul>
                 <li><a href="#product-video">Human Avatar 视频生成</a>
                     <ul>
-                        <li><a href="#product-video-tech">技术方案</a></li>
-                        <li><a href="#product-video-avatar">形象生成</a></li>
-                        <li><a href="#product-video-product-integration">商品图融入</a></li>
-                        <li><a href="#product-video-generation">human avatar 视频生成</a></li>
+                        <li><a href="#research-background">研究背景</a></li>
+                        <li><a href="#product-video-results">效果展示</a></li>
+                    </ul>
+                </li>
+                <li><a href="#product-background-video">商品背景微动视频生成</a>
+                    <ul>
+                        <li><a href="#product-background-video-results">效果展示</a></li>
                     </ul>
                 </li>
                 <li><a href="#subtitle-removal">视频字幕擦除</a>
                     <ul>
-                        <li><a href="#subtitle-removal-tech">技术方案</a></li>
                         <li><a href="#subtitle-removal-results">效果展示</a></li>
                     </ul>
                 </li>
                 <li><a href="#lip-sync-v2">视频改口型V2</a>
                     <ul>
-                        <li><a href="#lip-sync-v2-challenges">短剧翻译难点</a></li>
                         <li><a href="#lip-sync-v2-tech">技术方案</a></li>
                         <li><a href="#lip-sync-v2-results">效果展示</a></li>
                     </ul>
@@ -67,48 +69,14 @@
     <div class="container">
         <section id="product-video" class="project-card">
             <h2>Human Avatar 视频生成</h2>
-            <p>开源audio human avatar工作（如multitalk、omniavatar、hunyuan-avatar等），由于其通用属性，<strong>在口播场景下“音频-手势”同步方面表现不佳，尤其在说话时人物手势难以跟随语气音调产生自然明显的节奏变化</strong>。<strong>我们方案在“音频-手势同步性”这一关键维度上，相较于Multitalk、FantasyTalking及HunyuanAvatar等主流开源方案，展现出明显可感知的优势，生成的手势与语音内容在节奏和语义上具有更高的契合度</strong>。
-        除此之外，生成的视频具有真实自然的头部微动作和手势变化，展现出较高的真实度。</p>
-            <h3 id="product-video-tech">技术方案</h3>
-            <div class="results">
-                <div class="result-card widescreen"><img src="images/人物商品视频生成总流程.png"></div>
-            </div>
-            <h3 id="product-video-avatar">形象生成</h3>
-            <div class="results">
-                <div class="result-card"><img src="images/数字人形象image1.png"></div>
-                <div class="result-card"><img src="images/数字人形象image2.png"></div>
-                <div class="result-card"><img src="images/数字人形象image3.png"></div>
-                <div class="result-card"><img src="images/数字人形象image4.png"></div>
-            </div>
-            <h3 id="product-video-product-integration">商品图融入</h3>
-            <h4>模版检索</h4>
-            <p>检索流程：</p>
-            <div class="results">
-                <div class="result-card widescreen"><img src="images/模版检索.png"></div>
-            </div>
-            <p>效果展示：</p>
-            <div class="results">
-                <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果1.jpg"></div>
-            </div>
-            <div class="results">
-                <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果3.jpg"></div>
-            </div>
-            <div class="results">
-                <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果4.jpg"></div>
-            </div>
-            <h4>商品插入</h4>
-            <p>效果展示：</p>
-            <div class="results">
-                <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果2.jpg"></div>
-            </div>
-            <div class="results">
-                <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果4.jpg"></div>
-            </div>
-            <div class="results">
-                <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果5.jpg"></div>
-            </div>
-            <h3 id="product-video-generation">Human Avatar 视频生成</h3>
-            <h4>最新效果</h4>
+            <h3 id="research-background">研究背景</h3>
+            <p>Human avatar视频生成在业界具有广泛的应用与良好的商业价值，例如国外的闭源应用heygen、topview，国内的keling-avatar、omnihuman等都受到广泛关注，并具有可观的用户数量。
+                <strong>我们基于此背景研发了一套human avatar视频生成系统，对比主流开源模型，我们的结果具有高保真度、高音频手势同步、高唇形同步、自然的头部微动作等优势。</strong>
+            </p>
+            <div class="single-image-container"><div class="result-card"><img src="images/heygen.png"></div></div>
+            <div class="single-image-container"><div class="result-card"><img src="images/topview.png"></div></div>
+            
+            <h3 id="product-video-results">自研效果</h3>
             <div class="results">
                 <!-- <div class="result-card portrait"><p>生成视频</p><video controls src="videos2/0929_1.mp4"></video></div> -->
                 <div class="result-card portrait"><p>生成视频</p><video controls src="videos2/0929_2.mp4"></video></div>
@@ -136,32 +104,39 @@
 
         </section>
 
+        <section id="product-background-video" class="project-card">
+            <h2>商品背景微动视频生成</h2>
+            <h3 id="product-background-video-results">效果展示</h3>
+            <div class="results">
+                <!-- Placeholder for results -->
+                <div class="result-card portrait"><video controls src="videos3/3630023376397032003.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3593641885639527180.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3622000589837351132.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3578418957822127291.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3631112951643125021.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3644695745258472507.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3683628400729260419.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3694959381385970048.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3716858936478007494.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3718501855966396756.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3725014473757556819.mp4"></video></div>
+                <div class="result-card portrait"><video controls src="videos3/3743373590653960332.mp4"></video></div>
+
+            </div>
+        </section>
+
         <section id="subtitle-removal" class="project-card">
             <h2>视频字幕擦除</h2>
-            <h3 id="subtitle-removal-tech">技术方案</h3>
-            <p>基于wan2.1的视频字幕擦除方案，介绍见ByteTech：<a href="https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe">https://bytetech.info/articles/7521726488270503962#O9WHd3mqro6hg8xP66wcV2KdnQe</a></p>
-             <ul>
-                <li>视频ocr模块</li>
-                <li>字幕mask模块</li>
-                <li>视频inpainting模块</li>
-             </ul>
             <h3 id="subtitle-removal-results">效果展示</h3>
-            <div class="results">
-                <div class="result-card widescreen"><video controls src="videos2/字幕擦除demo.mp4"></video></div>
-                <div class="result-card widescreen"><video controls src="videos2/字幕擦除_友商对比.mp4"></video></div>
+            <div class="sixty-percent-container">
+                <div class="result-card"><video controls src="videos2/字幕擦除demo.mp4"></video></div>
+            </div>
+            <div class="sixty-percent-container">
+                <div class="result-card"><video controls src="videos2/字幕擦除_友商对比.mp4"></video></div>
             </div>
         </section>
 
         <section id="lip-sync-v2" class="project-card">
-            <h2>视频改口型V2：两阶段方案，支持多人场景</h2>
-            <h3 id="lip-sync-v2-challenges">视频改口型难点</h3>
-            <ul>
-                <li>画面中可能有多人，如何实现精准的音频与人脸配对</li>
-                <li>生成质量要求高</li>
-                <li>时序稳定性要求高</li>
-                <li>频繁遮挡与侧脸</li>
-                <li>整体流程复杂，耗时高</li>
-            </ul>
             <h3 id="lip-sync-v2-tech">技术方案</h3>
             <h4>模型设计</h4>
             <ul>
@@ -292,8 +267,8 @@
             <div class="results">
                 <div class="result-card portrait"><p>原视频</p><video controls src="videos2/百那瑞1 (1).mp4"></video></div>
                 <div class="result-card portrait"><p>翻译后</p><video controls src="videos2/百那瑞1_result (1).mp4"></video></div>
-                <div class="result-card portrait"><p>原视频</p><video controls src="videos2/哥斯拉原片 (1).mp4"></video></div>
-                <div class="result-card portrait"><p>翻译后</p><video controls src="videos2/哥斯拉原片_result (1).mp4"></video></div>
+                <!-- <div class="result-card portrait"><p>原视频</p><video controls src="videos2/哥斯拉原片 (1).mp4"></video></div> -->
+                <!-- <div class="result-card portrait"><p>翻译后</p><video controls src="videos2/哥斯拉原片_result (1).mp4"></video></div> -->
                 <div class="result-card portrait"><p>原视频</p><video controls src="videos2/诱她入骨06_遮挡2s_25fps (1).mp4"></video></div>
                 <div class="result-card portrait"><p>翻译后</p><video controls src="videos2/output (45) (1).mp4"></video></div>
             </div>
@@ -320,10 +295,10 @@
                 <div class="result-card widescreen"><p>原视频</p><video controls src="videos2/谭待素材1_25fps_input (1).mp4"></video></div>
                 <div class="result-card widescreen"><p>翻译后</p><video controls src="videos2/谭待素材1_25fps_谭待素材1音频_1_inp.mp4"></video></div>
             </div>
-            <p>大会开场5分钟领导的数字分身</p>
+            <!-- <p>大会开场5分钟领导的数字分身</p>
             <div class="results">
                 <div class="result-card portrait"><video controls src="videos2/xxxx (4).mp4"></video></div>
-            </div>
+            </div> -->
             <h4>即时零售</h4>
             <p>无需任何拍摄，利用商家已上传的图片和视频，自动生成商品讲解文案并剪辑为图文视频，配合已有数字人形象进行讲解</p>
             <div class="results">

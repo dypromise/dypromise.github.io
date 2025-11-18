@@ -125,8 +125,24 @@ ul {
     margin: 1.5rem 0;
 }
 
+.single-image-container {
+    width: 80%;
+    margin: 1.5rem auto;
+}
+
+.sixty-percent-container {
+    width: 60%;
+    margin: 1.5rem auto;
+    display: flex;
+    justify-content: center;
+}
+
 .result-card.widescreen {
     grid-column: span 2;
+}
+
+.result-card.full-width {
+    grid-column: span 4;
 }
 
 .result-card.portrait {
