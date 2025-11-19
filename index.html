@@ -51,10 +51,10 @@
                 </li>
                 <li><a href="#lip-sync-v2">视频改口型V2</a>
                     <ul>
-                        <li><a href="#lip-sync-v2-challenges">项目难点</a></li>
-                        <li><a href="#lip-sync-v2-tech">技术方案</a></li>
-                        <li><a href="#lip-sync-v2-results">效果展示</a></li>
-                    </ul>
+                         <li><a href="#lip-sync-v2-introduction">项目介绍</a></li>
+                         <li><a href="#lip-sync-v2-tech">技术方案</a></li>
+                         <li><a href="#lip-sync-v2-results">效果展示</a></li>
+                     </ul>
                 </li>
                 <li><a href="#lip-sync-v1">视频改口型V1</a>
                     <ul>
@@ -182,19 +182,20 @@
 
         <section id="lip-sync-v2" class="project-card">
             <h2>视频改口型V2：两阶段方案，支持多人场景</h2>
-            <h3 id="lip-sync-v2-challenges">项目难点</h3>
-            <ul>
-                <li>画面中可能有多人，如何实现精准的音频与人脸配对</li>
-                <li>如何生成精准的口型动作，同时不丢失用户纹理与口型特征</li>
-                <li>生成质量要求高</li>
-                <li>时序稳定性要求高</li>
-                <li>如何处理遮挡与侧脸</li>
-                <li>如何缩减整体流程耗时</li>
-            </ul>
+            <h3 id="lip-sync-v2-introduction">项目介绍</h3>
+             <p>视频改口型V2项目旨在根据输入音频对原视频实现精准的口型替换。该方案采用先进的两阶段技术，具备以下优势：</p>
+             <ul>
+                <li><b>支持多人场景：</b>通过增强ASD模块与基于图的匹配算法，能够准确匹配音频和画面人物，为指定人物替换口型。</li>
+                <li><b>高保真口型生成：</b>可生成具有用户口型风格的口型动作，且高度保留用户的面部纹理特征；512分辨率训练推理，保证生成质量。</li>
+                <li><b>鲁棒性强：</b>能有效处理面部遮挡、侧脸等具有挑战性的场景。</li>
+                <li><b>时序稳定：</b>通过多尺度的时序优化，有效解决视频抖动问题，保证画面的流畅与稳定。</li>
+                <li><b>高效处理：</b>整体流程经过优化，显著缩减了处理耗时，提高了生成效率。</li>
+                
+             </ul>
             <h3 id="lip-sync-v2-tech">技术方案</h3>
             <h4>模型设计</h4>
             <ul>
-                <li><b>算法框架：两阶段的改口型框架，Audio2Motion + Motion2Video ，分别负责‘口型动作生成’与‘视频纹理生成’</b></li>
+                <li><b>两阶段的改口型框架，Audio2Motion + Motion2Video ，分别负责‘口型动作生成’与‘视频纹理生成’</b></li>
                 <li>audio2motion模型:
                     <ul>
                         <li>模型结构：audio encoder + motion encoder + deep cnn decoder，cross attention融合音频特征和参考motion特征，输入deep cnn预测最终motion；</li>
