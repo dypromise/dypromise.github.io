@@ -33,7 +33,9 @@
                 <li><a href="#product-video">Human Avatar 视频生成</a>
                     <ul>
                         <li><a href="#research-background">研究背景</a></li>
-                        <li><a href="#product-video-results">效果展示</a></li>
+                        <li><a href="#product-video-avatar">avatar形象生成</a></li>
+                        <li><a href="#product-video-product-integration">商品融入</a></li>
+                        <li><a href="#product-video-results">视频效果展示</a></li>
                     </ul>
                 </li>
                 <li><a href="#product-background-video">商品背景微动视频生成</a>
@@ -43,11 +45,13 @@
                 </li>
                 <li><a href="#subtitle-removal">视频字幕擦除</a>
                     <ul>
+                        <li><a href="#subtitle-removal-tech">技术方案</a></li>
                         <li><a href="#subtitle-removal-results">效果展示</a></li>
                     </ul>
                 </li>
                 <li><a href="#lip-sync-v2">视频改口型V2</a>
                     <ul>
+                        <li><a href="#lip-sync-v2-challenges">项目难点</a></li>
                         <li><a href="#lip-sync-v2-tech">技术方案</a></li>
                         <li><a href="#lip-sync-v2-results">效果展示</a></li>
                     </ul>
@@ -70,13 +74,50 @@
         <section id="product-video" class="project-card">
             <h2>Human Avatar 视频生成</h2>
             <h3 id="research-background">研究背景</h3>
-            <p>Human avatar视频生成在业界具有广泛的应用与良好的商业价值，例如国外的闭源应用heygen、topview，国内的keling-avatar、omnihuman等都受到广泛关注，并具有可观的用户数量。
-                <strong>我们基于此背景研发了一套human avatar视频生成系统，对比主流开源模型，我们的结果具有高保真度、高音频手势同步、高唇形同步、自然的头部微动作等优势。</strong>
-            </p>
+            <p>Human avatar视频生成在业界具有广泛的应用与良好的商业价值，例如国外的闭源应用heygen、topview，国内的keling-avatar、omnihuman等都受到广泛关注，并具有可观的用户数量。但是<b>开源human avatar工作，像multitalk、omniavatar、hunyuan-avatar，在画面保真度、音频动作同步度、动作自然方面表现不能令人满意：</b></p>
+             <ul>
+                <li>手部崩坏</li>
+                <li>动作不自然</li>
+                <li>说话时人物手势、微表情难以跟随语气音调产生自然的节奏变化</li>
+             </ul>
+             <p><strong>在此背景下，我们自研了一套human avatar视频生成模型，对比主流开源模型，我们的结果具有以下优势：</strong></p>
+             <ul>
+                <li>高保真度</li>
+                <li>高音频手势同步</li>
+                <li>高唇形同步</li>
+                <li>自然的头部微动作</li>
+             </ul>
             <div class="single-image-container"><div class="result-card"><img src="images/heygen.png"></div></div>
             <div class="single-image-container"><div class="result-card"><img src="images/topview.png"></div></div>
-            
-            <h3 id="product-video-results">自研效果</h3>
+            <h3 id="product-video-avatar">形象生成</h3>
+            <div class="results">
+                <div class="result-card"><img src="images/数字人形象image1.png"></div>
+                <div class="result-card"><img src="images/数字人形象image2.png"></div>
+                <div class="result-card"><img src="images/数字人形象image3.png"></div>
+                <div class="result-card"><img src="images/数字人形象image4.png"></div>
+            </div>
+            <h3 id="product-video-product-integration">商品融入</h3>
+            <h4>模版检索</h4>
+            <div class="results">
+                <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果1.jpg"></div>
+            </div>
+            <div class="results">
+                <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果3.jpg"></div>
+            </div>
+            <div class="results">
+                <div class="result-card" style="grid-column: span 4;"><img src="images/检索效果4.jpg"></div>
+            </div>
+            <h4>商品融入</h4>
+            <div class="results">
+                <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果2.jpg"></div>
+            </div>
+            <div class="results">
+                <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果4.jpg"></div>
+            </div>
+            <div class="results">
+                <div class="result-card" style="grid-column: span 4;"><img src="images/替换效果5.jpg"></div>
+            </div>
+            <h3 id="product-video-results">Human Avatar视频生成</h3>
             <div class="results">
                 <!-- <div class="result-card portrait"><p>生成视频</p><video controls src="videos2/0929_1.mp4"></video></div> -->
                 <div class="result-card portrait"><p>生成视频</p><video controls src="videos2/0929_2.mp4"></video></div>
@@ -106,6 +147,7 @@
 
         <section id="product-background-video" class="project-card">
             <h2>商品背景微动视频生成</h2>
+            <p>将静态的商品白底图转化为背景具有微妙动态效果的短视频，有效提升商品的吸引力和真实感，为电商营销、社交媒体广告等场景提供新颖的视觉解决方案。</p>
             <h3 id="product-background-video-results">效果展示</h3>
             <div class="results">
                 <!-- Placeholder for results -->
@@ -127,6 +169,8 @@
 
         <section id="subtitle-removal" class="project-card">
             <h2>视频字幕擦除</h2>
+            <h3 id="subtitle-removal-tech">技术方案</h3>
+            <p>视频渲染文字擦除，包含视频ocr、字幕mask、视频inpainting模块</p>
             <h3 id="subtitle-removal-results">效果展示</h3>
             <div class="sixty-percent-container">
                 <div class="result-card"><video controls src="videos2/字幕擦除demo.mp4"></video></div>
@@ -137,10 +181,20 @@
         </section>
 
         <section id="lip-sync-v2" class="project-card">
+            <h2>视频改口型V2：两阶段方案，支持多人场景</h2>
+            <h3 id="lip-sync-v2-challenges">项目难点</h3>
+            <ul>
+                <li>画面中可能有多人，如何实现精准的音频与人脸配对</li>
+                <li>如何生成精准的口型动作，同时不丢失用户纹理与口型特征</li>
+                <li>生成质量要求高</li>
+                <li>时序稳定性要求高</li>
+                <li>如何处理遮挡与侧脸</li>
+                <li>如何缩减整体流程耗时</li>
+            </ul>
             <h3 id="lip-sync-v2-tech">技术方案</h3>
             <h4>模型设计</h4>
             <ul>
-                <li>算法框架：两阶段的改口型框架，Audio2Motion + Motion2Video ，分别负责 口型动作生成 与 视频纹理生成 (GAN)</li>
+                <li><b>算法框架：两阶段的改口型框架，Audio2Motion + Motion2Video ，分别负责‘口型动作生成’与‘视频纹理生成’</b></li>
                 <li>audio2motion模型:
                     <ul>
                         <li>模型结构：audio encoder + motion encoder + deep cnn decoder，cross attention融合音频特征和参考motion特征，输入deep cnn预测最终motion；</li>
@@ -247,10 +301,6 @@
                 <li>遮挡模块由于大模型较多，我们用一个 单独进程异步处理segmap</li>
                 <li>实现多线程基类 （基于生产者消费者），支持同步、异步处理mediapipe点位、写视频、face_detect等操作</li>
             </ul>
-            <p>lipsync算法</p>
-            <div class="results">
-                <div class="result-card widescreen"><img src="images/lipsync流程.png"></div>
-            </div>
             <h3 id="lip-sync-v2-results">效果展示</h3>
             <h4>短视频 & 电商场景</h4>
             <div class="results">
