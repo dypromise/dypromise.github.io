@@ -52,7 +52,6 @@
                 <li><a href="#lip-sync-v2">视频改口型V2</a>
                     <ul>
                          <li><a href="#lip-sync-v2-introduction">项目介绍</a></li>
-                         <li><a href="#lip-sync-v2-tech">技术方案</a></li>
                          <li><a href="#lip-sync-v2-results">效果展示</a></li>
                      </ul>
                 </li>
@@ -192,116 +191,7 @@
                 <li><b>高效处理：</b>整体流程经过优化，显著缩减了处理耗时，提高了生成效率。</li>
                 
              </ul>
-            <h3 id="lip-sync-v2-tech">技术方案</h3>
-            <h4>模型设计</h4>
-            <ul>
-                <li><b>两阶段的改口型框架，Audio2Motion + Motion2Video ，分别负责‘口型动作生成’与‘视频纹理生成’</b></li>
-                <li>audio2motion模型:
-                    <ul>
-                        <li>模型结构：audio encoder + motion encoder + deep cnn decoder，cross attention融合音频特征和参考motion特征，输入deep cnn预测最终motion；</li>
-                        <li>3D点作为motion表示： 采用 deep3D 模型预测 + landmark-fitting 的方式，motion表示更精准；</li>
-                        <li>更多的motion点： 使用下半脸240个3D点，支持更灵活的面部运动；</li>
-                        <li>带参考motion的模型设计： 参考motion潜空间特征的均值方差作为参考运动风格输入motion decoder</li>
-                        <li>类classifier-free guidance的训练 ：增加可学习的embedding作为general motion特征，与参考motion特征在训练时随机作为motion特征，推理时则使用参数插值两者， 实现口型风格在泛化与本人之间可调；</li>
-                    </ul>
-                </li>
-                <li>motion2video模型: 基于多参考帧的GAN
-                    <ul>
-                        <li>模型结构：align module + translation module</li>
-                        <li>align module：根据target motion与source motion对多参考帧进行warp</li>
-                        <li>translation module：接收target motion与warpped特征，生成全脸图</li>
-                        <li>新颖的面部遮罩 ：包含鬓角，有效减轻yaw大角度时轮廓融合问题</li>
-                        <li>动态参考帧选择策略 ：
-                            <ul>
-                                <li>根据pose相似度选择 5帧动态参考帧</li>
-                                <li>根据张嘴大小 + 牙齿质量排序选择 20帧静态参考帧</li>
-                            </ul>
-                        </li>
-                        <li>512分辨率训练推理 ：提升面部清晰度</li>
-                        <li>生成质量评估：重建测试中SSIM 由 0.75 提升至 0.81，纹理保持主观评测中对 v1 有明显优势</li>
-                    </ul>
-                </li>
-            </ul>
-            <h4>音频多人匹配</h4>
-            <ul>
-                <li>Active Speaker Detection 模块输入‘人脸区域视频’与‘音频’，输出此人脸说话的置信度。一个简单的方案是所有人脸track与对应音频逐一进行ASD模型判断， 根据阈值或最高置信度决定是否在说话 。 这样做存在两个问题：
-                    <ul>
-                        <li>阈值不好设置 ，阈值设高了拒绝样本太多，召回率低，准确率高（漏判）；阈值低了召回高，准确低（误判）</li>
-                        <li>长视频无法结合声纹信息与人脸id信息 ，导致前后speaker_id不一致</li>
-                    </ul>
-                </li>
-                <li>我们设计的逻辑：
-                    <ul>
-                        <li>提升ASD模块精度： “多ASD模型 + 口部点位运动统计量”实现更高准确度的ASD模块</li>
-                        <li>逻辑优化：保证准确的情况下提升召回 。步骤：
-                            <ul>
-                                <li>ASD基础模块 高阈值保证配对成功语句的强置信</li>
-                                <li>整个视频时间跨度下 人脸ID特征聚类 ，形成人脸ID库</li>
-                                <li>整个视频时间跨度下 声纹特征聚类 ，形成声音ID库</li>
-                                <li>使用 基于传播（propagate）的图算法提升召回率</li>
-                            </ul>
-                        </li>
-                        <li>效果：此策略使准确率高达95%同时召回由30%提升到了65%</li>
-                    </ul>
-                </li>
-            </ul>
-            <h4>数据收集</h4>
-            <ul>
-                <li>构建数据处理pipline
-                    <ul>
-                        <li>视频基础过滤，码率、分辨率、音频存在性</li>
-                        <li>画质iqa过滤</li>
-                        <li>同步性过滤：人脸检测 -> 人脸追踪 -> 口型同步分数过滤 -> 抠出人头区域</li>
-                    </ul>
-                </li>
-                <li>b站10k长视频处理后得到约400h clip数据</li>
-                <li>Avspeech、TalkingHead-1kh中部分视频，筛选处理后约200h clip数据</li>
-            </ul>
-            <h4>遮挡优化</h4>
-            <ul>
-                <li>短剧、电商场景经常会出现遮挡，我们利用sam2的分割能力设计出一套分割流程，可以鲁棒地分割出非遮挡区域。 具体步骤：
-                    <ul>
-                        <li>使用face-parsing分割出脖子区域，找到 脖子中心点位</li>
-                        <li>使用sapiens预测 人手点位</li>
-                        <li>使用florece预测 商品框</li>
-                        <li>多维度打分排序策略 ：不合常识的商品框过滤、脖子框存在性检查、人手遮挡程度，商品框遮挡程度等规则，最终根据得分对帧排序</li>
-                        <li>引导点 + 引导框提升sam2鲁棒性 ：得分最优的5帧作为sam2引导帧，正引导点为鼻子点、下巴点、脖子点，负引导点为手部点，引导框为人脸-脖子框</li>
-                        <li>分段sam2推理 ：为保证长视频分割的连续性、降低显存使用，我们用分段推理，每段复用引导帧</li>
-                    </ul>
-                </li>
-                <li>这样得到了较高鲁棒性的人皮肤非遮挡区域，帮助motion2video的输出并回帖。</li>
-            </ul>
-            <h4>时序优化</h4>
-            <ul>
-                <li>通过优化算法流程中 各个环节的人脸点位、3D参数 提升时序稳定性</li>
-                <li>多尺度点位 ：
-                    <ul>
-                        <li>coarse点：人脸检测框外扩x倍最大外接框mediapipe人脸点位，image mode</li>
-                        <li>fine点：coarse点的外接框外扩x倍medipipe人脸点位，image + video mode</li>
-                        <li>deep3d点：deep3d net预测投影得到2d点</li>
-                        <li>fit点：fine和deep3d插值后的点 3dmm fitting后的shape投影得到2d点</li>
-                    </ul>
-                </li>
-                <li>点位回滚：观察到精细点位虽然准，但会漏检，因此当精细点位漏检时使用粗点位代替</li>
-                <li>点位补全：对于满足条件的“空洞”帧，使用前后帧插值补全</li>
-                <li>多粒度连续性分段 ：按框、粗点位、细点位等规则按连续性划分视频帧split ，目的是使split段内点位是连续的，方便后续平滑处理</li>
-                <li>点位平滑：split内做卡尔曼滤波</li>
-                <li>3dmm fitting加入 时序平滑约束 ，使fitting出的参数时序更平滑</li>
-                <li>deep3d投影点与mediapipe点插值优：化大角度时点位稳定性</li>
-            </ul>
-            <h4>侧脸优化</h4>
-            <ul>
-                <li>mediapipe的点位与deep3dface的投影点位做线性插值</li>
-                <li>公式：alpha * mediapipe + (1 - alpha) * deep3d</li>
-                <li>30度以内 alpha = 1，30-45度线性减少到0，大于45度alpha=0。</li>
-            </ul>
-            <h4>耗时优化</h4>
-            <ul>
-                <li>多措施优化耗时，最终整体短剧类RTF由1:10降低至1:5</li>
-                <li>模型torch compile编译</li>
-                <li>遮挡模块由于大模型较多，我们用一个 单独进程异步处理segmap</li>
-                <li>实现多线程基类 （基于生产者消费者），支持同步、异步处理mediapipe点位、写视频、face_detect等操作</li>
-            </ul>
+            
             <h3 id="lip-sync-v2-results">效果展示</h3>
             <h4>短视频 & 电商场景</h4>
             <div class="results">
